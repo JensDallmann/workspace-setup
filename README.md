@@ -25,7 +25,7 @@ After:
      MAVEN_CMD_LINE_ARGS="$MAVEN_CONFIG $@"
      export MAVEN_CMD_LINE_ARGS
      
-     localMavenRepo=$(findRepository.sh)
+     localMavenRepo=$(findLocalMavenRepo.sh)
      echo "Customization: Use $localMavenRepo"
      exec "$JAVACMD" \
      $MAVEN_OPTS \
