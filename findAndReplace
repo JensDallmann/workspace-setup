@@ -1,0 +1,28 @@
+#!/bin/bash
+
+filePattern="*"
+if [ "x$1" = "x" ]; then
+    echo "First Parameter not set but is required. First parameter tells me what to replace"
+    exit 1;
+fi
+
+if [ "x$2" = "x" ]; then
+    echo "Second Parameter not set but is required. Second parameter tells me with what I have to replace $1"
+    exit 1;
+fi
+
+if [ "x$3" = "x" ]; then
+    echo "Third Parameter not set but is required. Third parameter tells me under which directory I have to replace $1 with $2."
+    exit 1;
+fi
+
+if [ "x$4" != "x" ]; then
+    filePattern="$4"
+    echo "Use filepattern $filePattern for search"
+fi
+
+for i in `find "$3" -name "$filePattern" -type f -exec grep -l "$1" {} \;`
+do
+        echo "Replace $1 with $2 in $i"
+        sed -i "s|$1|$2|g" "$i"
+done
